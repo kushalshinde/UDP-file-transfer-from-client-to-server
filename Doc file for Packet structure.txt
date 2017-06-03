@@ -1,0 +1,40 @@
+Project: - UDP protocol for building a file transfer client and server
+
+Description of packet structure, including the size and name of fields in each type of the packets
+
+
+Server side: - 
+
+variables : - 
+1. char size_file_str[SIZE] - to store file length size
+2. size_of_file - atoi(size_file_str)
+3. data - malloc(size_of_file)
+4. bytes_total - intialized to 0
+
+In while loop, it will run till bytes_total = size_of_file
+	for each byte (packet),
+	 bytes_recev = recvfrom(s, buf_file, (size_of_file - bytes_total), 0, NULL, 0);
+  
+Increameted the size : - 
+	buf_file=buf_file+bytes_recev;
+    bytes_total=bytes_total+bytes_recev;
+
+
+
+Client Side: - 	
+
+	
+Variables: - 
+1. ret_bytes - for storing fread - reading bytes of file result
+
+In a while loop, until ret_bytes less than 0
+
+send each byte of a file
+ sendto(s, buf_file, ret_bytes, 0, (struct sockaddr *)&client_address, sizeof (struct sockaddr))
+
+memset(buf_file, 0, sizeof(buf_file)) - memset returns to the memory area buf_file
+
+ 
+	
+	
+	
